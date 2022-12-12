@@ -21,6 +21,7 @@ services:
         image: jlesage/firefox
         restart: always
         container_name: victim-10.9.0.5
+        privileged: true
         volumes:
             - /dev/shm:/dev/shm
             #- ./volumes-victim:/volumes
@@ -50,6 +51,9 @@ services:
                 - ALL
         volumes:
                 - ./volumes-user1:/volumes
+        privileged: true
+        sysctls:
+                - net.ipv4.tcp_syncookies=0
         networks:
             net-10.9.0.0:
                 ipv4_address: 10.9.0.6
